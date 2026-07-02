@@ -1,0 +1,35 @@
+name: 🎲 Anmeldung zum Spieleabend
+description: Melde dich hier für den Spieleabend am 15.07.2026 an!
+title: "RSVP: "
+labels: ["rsvp"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Dein Name
+      placeholder: "z. B. Max Mustermann"
+    validations:
+      required: true
+  - type: dropdown
+    id: attending
+    attributes:
+      label: "Kommst du?"
+      options:
+        - "Ja, ich bin dabei! 🎉"
+        - "Nein, leider nicht 😢"
+        - "Vielleicht, ich sage noch Bescheid"
+    validations:
+      required: true
+  - type: input
+    id: guests
+    attributes:
+      label: "Wie viele weitere Personen bringst du mit?"
+      placeholder: "0"
+  - type: input
+    id: snack
+    attributes:
+      label: "Snack oder Getränk, das du mitbringst (optional)"
+  - type: textarea
+    id: message
+    attributes:
+      label: "Nachricht (optional)"

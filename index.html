@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spieleabend – 15. Juli 2026</title>
+<style>
+  :root {
+    --navy: #1a1a2e;
+    --navy2: #16213e;
+    --purple: #6c5ce7;
+    --pink: #ff6b9d;
+    --cyan: #00d9ff;
+    --yellow: #ffd166;
+    --light: #dcdceb;
+    --white: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy2) 100%);
+    color: var(--white);
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header { text-align: center; margin-bottom: 32px; }
+  .dice { font-size: 40px; }
+  h1 {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin: 8px 0 4px;
+  }
+  .tagline {
+    color: var(--light);
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  .accent-line {
+    width: 120px;
+    height: 4px;
+    background: var(--cyan);
+    margin: 20px auto;
+    border-radius: 2px;
+  }
+  .date-card {
+    background: linear-gradient(45deg, var(--purple), var(--pink));
+    border-radius: 20px;
+    padding: 28px;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .date-card .date { font-size: 34px; font-weight: 800; margin: 0; }
+  .date-card .time { font-size: 20px; margin: 6px 0 0; opacity: 0.95; }
+  section {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+  section h2 {
+    color: var(--yellow);
+    font-size: 20px;
+    margin-top: 0;
+  }
+  .timeline { list-style: none; padding: 0; margin: 0; }
+  .timeline li {
+    display: flex;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .timeline li:last-child { border-bottom: none; }
+  .timeline .t { color: var(--cyan); font-weight: 700; min-width: 78px; }
+  ul.plain { padding-left: 20px; margin: 8px 0; }
+  ul.plain li { margin-bottom: 6px; color: var(--light); }
+  .snack-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .snack-grid h3 { color: var(--cyan); font-size: 15px; margin: 0 0 6px; }
+  @media (max-width: 520px) {
+    .snack-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 32px; }
+  }
+  .rsvp-section { text-align: center; }
+  .rsvp-btn {
+    display: inline-block;
+    background: var(--cyan);
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 18px;
+    padding: 16px 36px;
+    border-radius: 999px;
+    text-decoration: none;
+    margin: 16px 0 8px;
+    transition: transform 0.15s ease;
+  }
+  .rsvp-btn:hover { transform: scale(1.04); }
+  .rsvp-hint { color: var(--light); font-size: 13px; }
+  #guestlist { list-style: none; padding: 0; margin: 12px 0 0; }
+  #guestlist li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 10px;
+    margin-bottom: 8px;
+  }
+  #guestlist .name { font-weight: 600; }
+  #guestlist .status { font-size: 14px; color: var(--light); text-align: right; }
+  #guestlist .note { display:block; font-size: 12px; color: var(--light); opacity: 0.8; margin-top: 2px; }
+  #guestlist-empty, #guestlist-error { color: var(--light); font-size: 14px; }
+  footer {
+    text-align: center;
+    color: var(--light);
+    font-style: italic;
+    margin-top: 40px;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="dice">🎲</div>
+    <h1>SPIELEABEND</h1>
+    <p class="tagline">Ihr seid herzlich eingeladen!</p>
+    <div class="accent-line"></div>
+  </header>
+
+  <div class="date-card">
+    <p class="date">15. Juli 2026</p>
+    <p class="time">ab 19:00 Uhr</p>
+  </div>
+
+  <section class="rsvp-section">
+    <h2>Jetzt anmelden</h2>
+    <p style="color: var(--light);">Sagt mir kurz Bescheid, ob ihr dabei seid – dauert nur eine Minute.</p>
+    <a class="rsvp-btn" href="https://github.com/gianninamaurerextern/spieleabend-2026/issues/new?template=rsvp.yml" target="_blank" rel="noopener">
+      ✋ Jetzt anmelden
+    </a>
+    <p class="rsvp-hint">Öffnet ein kurzes Formular auf GitHub (kostenloser GitHub-Account nötig).</p>
+  </section>
+
+  <section>
+    <h2>Wer ist schon dabei?</h2>
+    <ul id="guestlist"></ul>
+    <p id="guestlist-empty" style="display:none;">Noch keine Anmeldungen – sei der/die Erste!</p>
+    <p id="guestlist-error" style="display:none;">Die Anmeldeliste konnte gerade nicht geladen werden. Schau gerne direkt auf <a href="https://github.com/gianninamaurerextern/spieleabend-2026/issues" style="color: var(--cyan);" target="_blank" rel="noopener">GitHub</a>.</p>
+  </section>
+
+  <section>
+    <h2>Ablauf des Abends</h2>
+    <ul class="timeline">
+      <li><span class="t">19:00</span><span>Ankommen &amp; Begrüßung – kleiner Snack zum Reinkommen</span></li>
+      <li><span class="t">19:30</span><span>Aufwärmspiel für alle zusammen</span></li>
+      <li><span class="t">20:00</span><span>Hauptspiel Runde 1</span></li>
+      <li><span class="t">21:00</span><span>Pause – Snacks &amp; Getränke auffüllen</span></li>
+      <li><span class="t">21:15</span><span>Hauptspiel Runde 2</span></li>
+      <li><span class="t">22:30</span><span>Ausklang mit entspanntem Spiel</span></li>
+      <li><span class="t">23:00</span><span>Ende</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Was mitbringen?</h2>
+    <ul class="plain">
+      <li>Gute Laune &amp; gerne euer Lieblingsspiel</li>
+      <li>Optional: ein Getränk oder einen kleinen Snack zum Teilen</li>
+    </ul>
+    <p style="color: var(--light); margin-bottom: 0;">Für die Grundverpflegung ist gesorgt.</p>
+  </section>
+
+  <section>
+    <h2>Snackliste (Vorschläge zum Mitbringen)</h2>
+    <div class="snack-grid">
+      <div>
+        <h3>Herzhaft</h3>
+        <ul class="plain">
+          <li>Chips &amp; Dips</li>
+          <li>Nachos mit Käse-Sauce</li>
+          <li>Salzstangen / Cracker</li>
+          <li>Käse- &amp; Wurstplatte</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Süß</h3>
+        <ul class="plain">
+          <li>Popcorn</li>
+          <li>Gummibärchen</li>
+          <li>Schokolade</li>
+          <li>Kekse</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Getränke</h3>
+        <ul class="plain">
+          <li>Wasser, Cola, Limo, Eistee</li>
+          <li>Saft</li>
+          <li>Bier / Wein (optional)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Hinweis</h3>
+        <p style="color: var(--light); margin: 0;">Trag im Anmeldeformular gerne ein, was du mitbringst, damit wir nicht doppelt einkaufen.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Ich freue mich auf einen unterhaltsamen Abend mit euch! 🎉
+  </footer>
+
+</div>
+
+<script>
+  const REPO = "gianninamaurerextern/spieleabend-2026";
+
+  function extractField(body, label) {
+    const escaped = label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp("### " + escaped + "\\s*\\n\\n([\\s\\S]*?)(?=\\n### |$)");
+    const m = body.match(re);
+    if (!m) return null;
+    const val = m[1].trim();
+    return (val === "" || val === "_No response_") ? null : val;
+  }
+
+  function statusEmoji(attending) {
+    if (!attending) return "❔";
+    if (attending.startsWith("Ja")) return "✅";
+    if (attending.startsWith("Nein")) return "❌";
+    return "🤔";
+  }
+
+  async function loadGuests() {
+    const list = document.getElementById("guestlist");
+    const empty = document.getElementById("guestlist-empty");
+    const error = document.getElementById("guestlist-error");
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/issues?labels=rsvp&state=all&per_page=100&sort=created&direction=asc`, {
+        headers: { "Accept": "application/vnd.github+json" }
+      });
+      if (!res.ok) throw new Error("API error " + res.status);
+      const issues = await res.json();
+
+      if (!Array.isArray(issues) || issues.length === 0) {
+        empty.style.display = "block";
+        return;
+      }
+
+      issues.forEach(issue => {
+        const body = issue.body || "";
+        const name = extractField(body, "Dein Name") || issue.title.replace(/^RSVP:\s*/, "") || "Unbekannt";
+        const attending = extractField(body, "Kommst du\\?");
+        const guests = extractField(body, "Wie viele weitere Personen bringst du mit\\?");
+        const snack = extractField(body, "Snack oder Getränk, das du mitbringst \\(optional\\)");
+
+        const li = document.createElement("li");
+        const notes = [];
+        if (guests) notes.push(`+${guests} Person(en)`);
+        if (snack) notes.push(`bringt mit: ${snack}`);
+
+        li.innerHTML = `
+          <span class="name">${statusEmoji(attending)} ${name}</span>
+          <span class="status">${attending || "keine Angabe"}${notes.length ? `<span class="note">${notes.join(" · ")}</span>` : ""}</span>
+        `;
+        list.appendChild(li);
+      });
+    } catch (e) {
+      error.style.display = "block";
+    }
+  }
+
+  loadGuests();
+</script>
+
+</body>
+</html>
